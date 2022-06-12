@@ -1,0 +1,40 @@
+2022-06-12T07:27:19.713302-00:00 0 [System] [MY-013169] [Server] /usr/sbin/mysqld (mysqld 8.0.28) initializing of server in progress as process 103
+2022-06-12T07:27:19.822543-00:00 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2022-06-12T07:27:19.853766-00:00 1 [ERROR] [MY-012585] [InnoDB] Linux Native AIO interface is not supported on this platform. Please check your OS documentation and install appropriate binary of InnoDB.
+2022-06-12T07:27:19.854870-00:00 1 [Warning] [MY-012654] [InnoDB] Linux Native AIO disabled.
+2022-06-12T07:27:23.813078-00:00 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2022-06-12T07:27:30.080638-00:00 6 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+2022-06-12T07:27:45.640323-00:00 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.28) starting as process 158
+2022-06-12T07:27:45.796432-00:00 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2022-06-12T07:27:46.091089-00:00 1 [ERROR] [MY-012585] [InnoDB] Linux Native AIO interface is not supported on this platform. Please check your OS documentation and install appropriate binary of InnoDB.
+2022-06-12T07:27:46.091985-00:00 1 [Warning] [MY-012654] [InnoDB] Linux Native AIO disabled.
+2022-06-12T07:27:47.240901-00:00 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2022-06-12T07:27:48.731841-00:00 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2022-06-12T07:27:48.733426-00:00 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2022-06-12T07:27:48.753995-00:00 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2022-06-12T07:27:48.912864-00:00 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: /var/run/mysqld/mysqlx.sock
+2022-06-12T07:27:48.916019-00:00 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.28'  socket: '/var/run/mysqld/mysqld.sock'  port: 0  MySQL Community Server - GPL.
+2022-06-12T07:28:09.476652-00:00 13 [System] [MY-013172] [Server] Received SHUTDOWN from user root. Shutting down mysqld (Version: 8.0.28).
+2022-06-12T07:28:10.613633-00:00 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.28)  MySQL Community Server - GPL.
+2022-06-12T07:28:12.107472-00:00 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.28) starting as process 1
+2022-06-12T07:28:12.248001-00:00 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2022-06-12T07:28:12.573460-00:00 1 [ERROR] [MY-012585] [InnoDB] Linux Native AIO interface is not supported on this platform. Please check your OS documentation and install appropriate binary of InnoDB.
+2022-06-12T07:28:12.574368-00:00 1 [Warning] [MY-012654] [InnoDB] Linux Native AIO disabled.
+2022-06-12T07:28:13.930599-00:00 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2022-06-12T07:28:15.155333-00:00 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2022-06-12T07:28:15.156897-00:00 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2022-06-12T07:28:15.176956-00:00 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2022-06-12T07:28:15.351114-00:00 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/run/mysqld/mysqlx.sock
+2022-06-12T07:28:15.352812-00:00 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.28'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+2022-06-12T07:30:00.006270-00:00 0 [System] [MY-013172] [Server] Received SHUTDOWN from user <via user signal>. Shutting down mysqld (Version: 8.0.28).
+2022-06-12T07:30:01.101115-00:00 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.28)  MySQL Community Server - GPL.
+2022-06-12T07:30:04.231758-00:00 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.28) starting as process 1
+2022-06-12T07:30:04.366561-00:00 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2022-06-12T07:30:04.660056-00:00 1 [ERROR] [MY-012585] [InnoDB] Linux Native AIO interface is not supported on this platform. Please check your OS documentation and install appropriate binary of InnoDB.
+2022-06-12T07:30:04.660978-00:00 1 [Warning] [MY-012654] [InnoDB] Linux Native AIO disabled.
+2022-06-12T07:30:05.865515-00:00 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2022-06-12T07:30:06.895971-00:00 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2022-06-12T07:30:06.898506-00:00 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2022-06-12T07:30:06.932177-00:00 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2022-06-12T07:30:07.176688-00:00 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/run/mysqld/mysqlx.sock
+2022-06-12T07:30:07.177596-00:00 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.28'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
