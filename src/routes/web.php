@@ -14,8 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('hello', function () {
-    return '<html><body><h1>Hello</h1><p>This is sample page.
-    </p></body></html>';
-});
+$html = <<<EOF
+<html>
+<head>
+<title>Hello</title>
+</head>
+<body>
+    <h1>Hello</h1>
+    <p>This is a sample page.</p>
+    <p>これは、サンプルで作ったページです</p>
+</body>
+</html>
+EOF;
 
+Route::get('hello', function () use ($html){
+    return $html;
+});
