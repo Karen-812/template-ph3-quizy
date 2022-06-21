@@ -12,3 +12,7 @@
 */
 
 Route::get('hello', 'HelloController@index');
+
+
+// Kuizy
+Route::get('kuizy', 'KuizyController@quiz');
