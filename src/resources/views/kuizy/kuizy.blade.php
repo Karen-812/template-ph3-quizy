@@ -33,3 +33,10 @@
         <li><a href="http://localhost/kuizy/1">{{$quiz1}}</a></li>
         <li><a href="http://localhost/kuizy/2">{{$quiz2}}</a></li>
     </ul>
+    @foreach ($items as $item)
+    <ul>
+        <li>{{$item->name}}</li>
+        <li>{{$item->mail}}</li>
+        <li>{{$item->age}}</li>
+    </ul>
+    @endforeach

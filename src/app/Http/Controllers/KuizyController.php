@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 
 class HelloController extends Controller
@@ -30,6 +31,16 @@ class HelloController extends Controller
 
 class KuizyController extends Controller
 {
+        public function index(Request $request){
+            $items = DB::select('select * from people');
+            $data = [
+                'msg' => 'クイズ一覧',
+                'quiz1' => '東京の難読地名クイズ',
+                'quiz2' => '広島県の難読地名クイズ',
+            ];
+            return view('kuizy.kuizy', ['items' => $items], $data);
+        }
+
         public function quiz(){
             $data = [
                 'msg' => 'クイズ一覧',
