@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>@yieled('title')</title>
+    </head>
+    <body>
+        <h1>@yield('title')</h1>
+        @section('menubar')
+        <ul>
+            @show
+        </ul>
+        <div>
+            @yield('footer')
+        </div>
+    </body>
+</html>
