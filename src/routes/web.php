@@ -17,5 +17,5 @@ Route::get('hello', 'HelloController@index');
 // Kuizy
 Route::get('kuizy/index', 'KuizyController@index');
 Route::get('kuizy', 'KuizyController@quiz');
-Route::get('kuizy/1', 'KuizyController@quiz1');
-Route::get('kuizy/2', 'KuizyController@quiz2');
+Route::get('kuizy/1', 'KuizyController@quiz1')->name('Kuizy.tokyo');
+Route::get('kuizy/2', 'KuizyController@quiz2')->name('Kuizy.hiroshima');

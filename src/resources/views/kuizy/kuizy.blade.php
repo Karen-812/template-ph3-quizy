@@ -1,9 +1,7 @@
 <?php
 /*
-@extends('layouts.helloapp')
 @section('titele', 'quiz' . $quiz_id)
 <!-- 引数の中はphpとして認識されるから波括弧はいらない -->
-@section('content')
 
 <?php
 // 今まで
@@ -28,15 +26,16 @@
 
     */
 ?>
-<h3>{{$msg}}</h3>
-    <ul>
-        <li><a href="http://localhost/kuizy/1">{{$quiz1}}</a></li>
-        <li><a href="http://localhost/kuizy/2">{{$quiz2}}</a></li>
-    </ul>
-    @foreach ($items as $item)
-    <ul>
-        <li>{{$item->name}}</li>
-        <li>{{$item->mail}}</li>
-        <li>{{$item->age}}</li>
-    </ul>
-    @endforeach
+@extends('layouts.kuizy')
+
+@section('title', $msg)
+
+@section('menubar')
+    @parent
+    <li><a href="{{route('Kuizy.tokyo')}}">{{$quiz1}}</a></li>
+    <li><a href="{{route('Kuizy.hiroshima')}}">{{$quiz2}}</a></li>
+@endsection
+
+@section('footer')
+    copyright 2022 karen.
+@endsection
