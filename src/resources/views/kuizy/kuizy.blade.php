@@ -30,6 +30,6 @@
 ?>
 <h3>{{$msg}}</h3>
     <ul>
-        <li><a href="http://localhost/kuizy/1">{{$quiz1}}</a></li>
-        <li><a href="http://localhost/kuizy/2">{{$quiz2}}</a></li>
+        <li><a href="{{route('Kuizy.tokyo')}}">{{$quiz1}}</a></li>
+        <li><a href="{{route('Kuizy.hiroshima')}}">{{$quiz2}}</a></li>
     </ul>
