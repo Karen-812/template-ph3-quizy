@@ -8,6 +8,14 @@
         <ul>
             @show
         </ul>
+            @foreach($questions as $question)
+            <img src="{{ $question->image }}"  alt="">
+            <ul>
+                @foreach($choices as $choice)
+                    <li>{{ $choice->choices }}</li>
+                @endforeach
+            </ul>
+            @endforeach
         <div>
             @yield('footer')
         </div>

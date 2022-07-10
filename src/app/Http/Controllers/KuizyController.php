@@ -50,14 +50,24 @@ class KuizyController extends Controller
             return view('kuizy.kuizy', $data);
         }
         public function quiz1(){
+            // $data = [
+            //     'title' => '東京の難読地名クイズ',
+            //     'question' => '1.この地名はなんて読む？',
+            //     'choice1' => 'こうわ',
+            //     'choice2' => 'たかわ',
+            //     'choice3' => 'たかなわ',
+            // ];
+            // return view('kuizy.kuizy_quiz', $data);
+            $questions = DB::table('questions')->get();
+            $choices = DB::table('choices')->get();
             $data = [
-                'title' => '東京の難読地名クイズ',
-                'question' => '1.この地名はなんて読む？',
-                'choice1' => 'こうわ',
-                'choice2' => 'たかわ',
-                'choice3' => 'たかなわ',
+                'msg' => 'クイズ一覧',
+                'quiz1' => '東京の難読地名クイズ',
+                'quiz2' => '広島県の難読地名クイズ',
+                'questions' => $questions,
+                'choices' => $choices,
             ];
-            return view('kuizy.kuizy_quiz', $data);
+            return view('kuizy.kuizy', $data);
         }
         public function quiz2(){
             $data = [
