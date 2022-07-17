@@ -3,31 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-
-
-class HelloController extends Controller
-{
-        public function index(Request $request, Response $response){
-            $html = <<<EOF
-            <html>
-            <head>
-            <title>Hello/Index</title>
-            </head>
-            <body>
-                <h1>Hello</h1>
-                <h3>Request</h3>
-                <pre>{$request}</pre>
-                <h3>Response</h3>
-                <pre>{$response}</pre>
-            </body>
-            </html>
-            EOF;
-                    $response -> setContent($html);
-                    return $response;
-        }
-}
 
 class KuizyController extends Controller
 {
@@ -50,16 +26,12 @@ class KuizyController extends Controller
             return view('kuizy.kuizy', $data);
         }
         public function quiz1(){
-            // $data = [
-            //     'title' => '東京の難読地名クイズ',
-            //     'question' => '1.この地名はなんて読む？',
-            //     'choice1' => 'こうわ',
-            //     'choice2' => 'たかわ',
-            //     'choice3' => 'たかなわ',
-            // ];
-            // return view('kuizy.kuizy_quiz', $data);
             $questions = DB::table('questions')->get();
             $choices = DB::table('choices')->get();
+            $questionWithChoices = DB::('questions')->join('choices', 'choices.??', '??', 'questions.??')
+                                ->where('big_question_id', '=', 1)
+                                ->get()
+                                ->groupBy('???');
             $data = [
                 'msg' => 'クイズ一覧',
                 'quiz1' => '東京の難読地名クイズ',

@@ -61,7 +61,7 @@ class ChoicesTableSeeder extends Seeder
         
         $param = [
             'big_question_id' => 2,
-            'question_id' => 1,
+            'question_id' => 11,
             'choices' => 'むこうひら',
             'is_correct' => 0,
         ];
@@ -69,7 +69,7 @@ class ChoicesTableSeeder extends Seeder
         
         $param = [
             'big_question_id' => 2,
-            'question_id' => 1,
+            'question_id' => 11,
             'choices' => 'むきひら',
             'is_correct' => 0,
         ];
@@ -77,7 +77,7 @@ class ChoicesTableSeeder extends Seeder
 
         $param = [
             'big_question_id' => 2,
-            'question_id' => 1,
+            'question_id' => 11,
             'choices' => 'むかいなだ',
             'is_correct' => 1,
         ];
