@@ -27,17 +27,21 @@ class KuizyController extends Controller
         }
         public function quiz1(){
             $questions = DB::table('questions')->get();
+            // dd($questions);
             $choices = DB::table('choices')->get();
-            $questionWithChoices = DB::('questions')->join('choices', 'choices.??', '??', 'questions.??')
-                                ->where('big_question_id', '=', 1)
+            // dd($choices);
+            $questionWithChoices = DB::table('questions')->join('choices', 'choices.question_id', '=', 'questions.id')
+                                ->where('choices.big_question_id', '=', 1)
                                 ->get()
-                                ->groupBy('???');
+                                ->groupBy('question_id');
+            // dd($questionWithChoices);
             $data = [
                 'msg' => 'クイズ一覧',
                 'quiz1' => '東京の難読地名クイズ',
                 'quiz2' => '広島県の難読地名クイズ',
                 'questions' => $questions,
                 'choices' => $choices,
+                'questionWithChoices' => $questionWithChoices,
             ];
             return view('kuizy.kuizy', $data);
         }

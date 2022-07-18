@@ -1,18 +1,20 @@
 <html>
     <head>
         <title>@yieled('title')</title>
+        <link href="https://unpkg.com/sanitize.css" rel="stylesheet"/>
     </head>
+
     <body>
         <h1>@yield('title')</h1>
         @section('menubar')
         <ul>
             @show
         </ul>
-            @foreach($questions as $question)
-            <img src="{{ $question->image }}"  alt="">
+            @foreach($questionWithChoices as $questionWithChoice)
+            <img src="{{ $questionWithChoice->first()->image }}" alt="">
             <ul>
-                @foreach($choices as $choice)
-                    <li>{{ $choice->choices }}</li>
+                @foreach($questionWithChoice as $Choice)
+                    <li>{{ $Choice->choices }}</li>
                 @endforeach
             </ul>
             @endforeach
