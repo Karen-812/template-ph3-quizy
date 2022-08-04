@@ -1,0 +1,33 @@
+.wrapper {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.choices {
+  width: 80%;
+  list-style: none;
+}
+
+.choices .choice {
+  border: 1px solid black;
+  width: 100%;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.choices .choice_correct {
+  border: 1px solid black;
+  width: 100%;
+  padding: 1em;
+  background-color: blue;
+  margin-bottom: 1em;
+}
+
+.choices .choice_wrong {
+  border: 1px solid black;
+  width: 100%;
+  padding: 1em;
+  background-color: red;
+  margin-bottom: 1em;
+}
+/*# sourceMappingURL=style.css.map */
