@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>@section('title', $quiz1)</title>
+    <title>@yield('head')</title>
     <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('/css/style.css')}}">
 </head>

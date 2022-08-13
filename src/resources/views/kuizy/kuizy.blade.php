@@ -1,6 +1,7 @@
 @extends('layouts.kuizy')
 
 
+        @section('head', $quiz1)
         @section('title', $quiz1)
         @section('menubar')
             <li><a href="{{route('Kuizy.tokyo')}}">{{$quiz1}}</a></li>
