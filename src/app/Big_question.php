@@ -10,4 +10,8 @@ class Big_question extends Model
     {
         return $this->hasMany('App\Choice');
     }
+    public function questions()
+    {
+        return $this->hasMany('App\Question');
+    }
 }

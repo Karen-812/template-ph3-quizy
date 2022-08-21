@@ -1,24 +1,21 @@
 @extends('layouts.kuizy')
 
-@section('title', 'Question.index')
-
+@section('title')
+@foreach($big_items as $item)
+    <h1> {{ $item -> name }}</h1>
 @section('menubar')
-    @foreach($big_items as $item)
-    <li>
-        {{ $item -> name }}
-    </li>
-    @endforeach
 @endsection
 
 @section('question')
+@foreach($item->questions as $question)
+    <img src="{{ $question->image }}" alt="">
     <ul>
-        @foreach($big_items as $item)
         @foreach($item->choices as $choice)
         <li>
             {{ $choice -> choices }}
         </li>
         @endforeach
-        @endforeach
-
     </ul>
+    @endforeach
+    @endforeach
 @endsection
