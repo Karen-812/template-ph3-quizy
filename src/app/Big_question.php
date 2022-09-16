@@ -14,4 +14,6 @@ class Big_question extends Model
     {
         return $this->hasMany('App\Question');
     }
+    public $timestamps = false;
+    // Unknown column 'updated_at' というエラーが出たため追加
 }
