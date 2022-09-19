@@ -22,6 +22,21 @@ class AdminController extends Controller
         $big_items = new Big_question;
         $big_items->name = $request->title;
         $big_items->save();
-        return redirect('/kuizy/model2');
+        return redirect('/kuizy/admin/add');
+    }
+    public function editIndex(Request $request)
+    {
+        $items = Big_question::all();
+        return view('admin.editIndex', compact('items'));
+    }
+    public function update(Request $request)
+    {
+        foreach ($request->titles as $id => $title){
+            $big_item = Big_question::find($id);
+            // $form = $request->all();
+            $big_item->fill(['name'=> $title])->save();
+        }
+        // dd($request->title);
+        return redirect('/kuizy/admin/edit');
     }
 }
