@@ -24,6 +24,7 @@ Route::get('kuizy/admin/add','AdminController@index')->name('Kuizy.admin');
 Route::post('kuizy/admin/add','AdminController@create')->name('Kuizy.admin');
 Route::get('kuizy/admin/edit','AdminController@editIndex')->name('Kuizy.admin2');
 Route::post('kuizy/admin/edit','AdminController@update')->name('Kuizy.admin2');
+Route::get('kuizy/admin/delete','AdminController@delete')->name('Kuizy.admin2');
 
 Auth::routes();
 
