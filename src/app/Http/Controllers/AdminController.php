@@ -39,4 +39,10 @@ class AdminController extends Controller
         // dd($request->title);
         return redirect('/kuizy/admin/edit');
     }
+    public function delete(Request $request)
+    {
+        $big_item = Big_question::find($request->id);
+        $big_item->delete();
+        return redirect('/kuizy/admin/edit');
+    }
 }

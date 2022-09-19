@@ -12,6 +12,7 @@
         @foreach($items as $item)
         <li>
             <input type="text" name="titles[{{ $item->id }}]" value = "{{ $item->name }}"></input>
+            <a href="/kuizy/admin/delete/?id={{ $item->id }}">削除</a>
         </li>
         @endforeach
     </ul>
