@@ -1,21 +1,23 @@
 @extends('layouts.kuizy')
 
-@section('title')
-
+@section('title', '追加画面')
 @section('menubar')
+<a href="/kuizy/admin/edit">編集画面へ</a>
 @endsection
 
 @section('question')
 
 <form action="/{{ request()->path() }}" method="POST" enctype="multipart/form-data">
-    <ul>
+    <ol>
         @foreach($items as $item)
-        <li>{{ $item->name }}</li>
+        <li><a href="/kuizy/admin/editQuestion/?id={{ $item->id }}">
+        {{ $item->name }}
+        </a></li>
         @endforeach
-    </ul>
+    </ol>
     @csrf
     <!-- @csrf Bladeディレクティブを使用して、非表示のトークン入力フィールドを生成できます。 -->
-    <input type="text" name="title">
+    <input size="40" type="text" name="title" value="新しいタイトルをここに追加">
     <input type="submit" value="追加">
 </form>
 @endsection
