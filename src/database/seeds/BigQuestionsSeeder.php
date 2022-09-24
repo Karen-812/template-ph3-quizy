@@ -12,12 +12,14 @@ class BigQuestionsSeeder extends Seeder
     public function run()
     {
         $param = [
-            'name' => '東京の難読地名クイズ'
+            'name' => '東京の難読地名クイズ',
+            'order' => 1
         ];
         DB::table('big_questions')->insert($param); // レコードをいくつか作成
         
         $param = [
-            'name' => '広島県の難読地名クイズ'
+            'name' => '広島県の難読地名クイズ',
+            'order' => 2
         ];
         DB::table('big_questions')->insert($param); // レコードをいくつか作成
 

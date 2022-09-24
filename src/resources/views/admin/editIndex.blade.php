@@ -3,23 +3,22 @@
 @section('title', '編集画面')
 
 @section('menubar')
+<a href="/kuizy/admin/add">新規追加画面へ</a>
 @endsection
 
 @section('question')
 
 <form action="/{{ request()->path() }}" method="POST" enctype="multipart/form-data">
-    <ul>
+    <ol>
         @foreach($items as $item)
         <li>
-            <input type="text" name="titles[{{ $item->id }}]" value = "{{ $item->name }}"></input>
+            <input size="40" type="text" name="titles[{{ $item->id }}]" value = "{{ $item->name }}"></input>
             <a href="/kuizy/admin/delete/?id={{ $item->id }}">削除</a>
         </li>
         @endforeach
-    </ul>
+    </ol>
     @csrf
     <!-- @csrf Bladeディレクティブを使用して、非表示のトークン入力フィールドを生成できます。 -->
     <input type="submit" value="更新">
 </form>
 @endsection
-
-
