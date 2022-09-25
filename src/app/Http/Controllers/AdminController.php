@@ -24,10 +24,10 @@ class AdminController extends Controller
         $big_items->save();
         return redirect('/kuizy/admin/add');
     }
-    public function editIndex(Request $request)
+    public function editBigQuestions(Request $request)
     {
         $items = Big_question::all();
-        return view('admin.editIndex', compact('items'));
+        return view('admin.editBigQuestions', compact('items'));
     }
     public function update(Request $request)
     {
@@ -40,6 +40,12 @@ class AdminController extends Controller
         return redirect('/kuizy/admin/edit');
     }
     public function delete(Request $request)
+    {
+        $big_item = Big_question::find($request->id);
+        $big_item->delete();
+        return redirect('/kuizy/admin/edit');
+    }
+    public function editQuiz(Request $request)
     {
         $big_item = Big_question::find($request->id);
         $big_item->delete();
