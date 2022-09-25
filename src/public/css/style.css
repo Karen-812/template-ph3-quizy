@@ -16,18 +16,18 @@
 }
 
 .choices .choice_correct {
-  border: 1px solid black;
-  width: 100%;
-  padding: 1em;
   background-color: blue;
   margin-bottom: 1em;
+  pointer-events: none;
 }
 
 .choices .choice_wrong {
-  border: 1px solid black;
-  width: 100%;
-  padding: 1em;
   background-color: red;
   margin-bottom: 1em;
+  pointer-events: none;
+}
+
+.choices .choice_another {
+  pointer-events: none;
 }
 /*# sourceMappingURL=style.css.map */

@@ -2,20 +2,28 @@
 
 @section('title')
 @foreach($big_items as $item)
-    <h1> {{ $item -> name }}</h1>
+<h1> {{ $item -> name }}</h1>
 @section('menubar')
 @endsection
 
 @section('question')
+@if(Auth::check())
+<p>USER: {{$user->name . '(' . $user->email . ')'}}</p>
+@else
+<p>※ログインしていません。(<a href="/login">ログイン</a>｜
+    <a href="/register">登録</a>)</p>
+@endif
 @foreach($item->questions as $question)
-    <img src="{{ $question->image }}" alt="">
-    <ul>
-        @foreach($item->choices as $choice)
-        <li>
-            {{ $choice -> choices }}
-        </li>
-        @endforeach
-    </ul>
+<img src="{{ $question->image }}" alt="">
+<ul class="choices">
+    @foreach($question->choices as $choice)
+    @if ($choice->is_correct == true)
+        <li onclick="isCorrect('choice_{{$choice->question_id}}_correct','choice_{{$choice->question_id}}')" id="choice_{{$choice->question_id}}_correct" class="choice">{{ $choice -> choices }}</li>
+    @elseif($choice->is_correct == false)
+        <li onclick="isCorrect('choice_{{$choice->question_id}}_wrong{{$loop->iteration}}','choice_{{$choice->question_id}}')" id="choice_{{$choice->question_id}}_wrong{{$loop->iteration}}" class="choice">{{ $choice -> choices }}</li>
+    @endif
     @endforeach
-    @endforeach
+</ul>
+@endforeach
+@endforeach
 @endsection
