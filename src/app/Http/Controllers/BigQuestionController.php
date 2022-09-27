@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Big_question;
+use App\Models\BigQuestion;
 use Illuminate\Http\Request;
 
-class Big_questionController extends Controller
+class BigQuestionController extends Controller
 {
     public function index(Request $request)
     {
