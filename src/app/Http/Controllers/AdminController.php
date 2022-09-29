@@ -14,41 +14,42 @@ class AdminController extends Controller
     {
         // $admin = Admin::all();
         // $user = Auth::user();
-        $items = Big_question::all();
+        $items = BigQuestion::all();
         return view('admin.index', compact('items'));
     }
     public function create(Request $request)
     {
-        $big_items = new Big_question;
+        $big_items = new BigQuestion;
         $big_items->name = $request->title;
+        $big_items->order = BigQuestion::max('order') + 1;
         $big_items->save();
         return redirect('/kuizy/admin/add');
     }
     public function editBigQuestions(Request $request)
     {
-        $items = Big_question::all();
-        return view('admin.editBigQuestions', compact('items'));
+        $items = BigQuestion::orderBy('order', 'asc')->get();
+        $count = $items->count();
+        return view('admin.editBigQuestions', compact('items','count'));
     }
     public function update(Request $request)
     {
-        foreach ($request->titles as $id => $title){
-            $big_item = Big_question::find($id);
-            // $form = $request->all();
-            $big_item->fill(['name'=> $title])->save();
+        foreach ($request->big_questions as $id => $big_question){
+            $big_item = BigQuestion::find($id);
+            $big_item->fill(['name' => $big_question['title'], 'order' => $big_question['order']])->save();
         }
         // dd($request->title);
         return redirect('/kuizy/admin/edit');
     }
     public function delete(Request $request)
     {
-        $big_item = Big_question::find($request->id);
+        $big_item = BigQuestion::find($request->id);
         $big_item->delete();
         return redirect('/kuizy/admin/edit');
     }
     public function editQuiz(Request $request)
     {
-        $big_item = Big_question::find($request->id);
-        $big_item->delete();
-        return redirect('/kuizy/admin/edit');
+        $big_item = BigQuestion::find($request->id);
+        $big_item -> ;
+        return view('admin.editBigQuestions', compact('items','count'));
     }
 }
