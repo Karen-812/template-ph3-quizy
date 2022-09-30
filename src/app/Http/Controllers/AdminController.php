@@ -14,7 +14,8 @@ class AdminController extends Controller
     {
         // $admin = Admin::all();
         // $user = Auth::user();
-        $items = BigQuestion::all();
+        // $items = BigQuestion::all();
+        $items = BigQuestion::orderBy('order', 'asc')->get();
         return view('admin.index', compact('items'));
     }
     public function create(Request $request)
@@ -48,8 +49,11 @@ class AdminController extends Controller
     }
     public function editQuiz(Request $request)
     {
-        $big_item = BigQuestion::find($request->id);
-        $big_item -> ;
-        return view('admin.editBigQuestions', compact('items','count'));
+        /*
+        こっちだとうまくいかなかったのはなんで？
+        $big_items = BigQuestion::find($request->id)->with('questions')->where('id', '=', $request->id )->get();
+        */
+        $big_items = BigQuestion::with('questions')->where('id', '=', $request->id )->get();
+        return view('admin.editQuestions', compact('big_items'));
     }
 }

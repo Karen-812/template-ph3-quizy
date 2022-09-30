@@ -17,7 +17,7 @@
     </ol>
     @csrf
     <!-- @csrf Bladeディレクティブを使用して、非表示のトークン入力フィールドを生成できます。 -->
-    <input size="40" type="text" name="title" value="新しいタイトルをここに追加">
+    <input size="40" type="text" name="title" placeholder="新しいタイトルをここに追加" value="">
     <input type="submit" value="追加">
 </form>
 @endsection
