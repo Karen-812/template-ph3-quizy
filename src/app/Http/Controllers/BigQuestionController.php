@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Big_question;
+use App\Models\BigQuestion;
 use Illuminate\Http\Request;
 
-class Big_questionController extends Controller
+class BigQuestionController extends Controller
 {
     public function index(Request $request)
     {
-        $big_items = Big_question::with('questions.choices')->get();
+        $big_items = BigQuestion::with('questions.choices')->get();
         return view('question.index', ['big_items' => $big_items]);
     }
 }
