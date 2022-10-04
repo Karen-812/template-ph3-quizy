@@ -49,11 +49,16 @@ class AdminController extends Controller
     }
     public function editQuiz(Request $request)
     {
-        /*
-        こっちだとうまくいかなかったのはなんで？
-        $big_items = BigQuestion::find($request->id)->with('questions')->where('id', '=', $request->id )->get();
-        */
         $big_items = BigQuestion::with('questions')->where('id', '=', $request->id )->get();
         return view('admin.editQuestions', compact('big_items'));
+    }
+    public function updateQuiz(Request $request)
+    {
+        foreach ($request->questions as $id => $question){
+            $big_item = BigQuestion::with('questions')->where('id', '=', $id );
+            $big_item->fill(['image' => $question['image']])->save();
+        }
+        // dd($request->title);
+        return redirect('/kuizy/admin/editQuestion/?id={{$request->id}}');       
     }
 }
