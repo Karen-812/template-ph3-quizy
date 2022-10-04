@@ -31,7 +31,7 @@ Route::get('kuizy/admin/delete','AdminController@delete')->name('Kuizy.admin2');
 
 // 大問の中身を編集
 Route::get('kuizy/admin/editQuestion','AdminController@editQuiz');
-Route::post('kuizy/admin/editQuestion','AdminController@editQuiz');
+Route::post('kuizy/admin/editQuestion','AdminController@updateQuiz');
 
 Auth::routes();
 

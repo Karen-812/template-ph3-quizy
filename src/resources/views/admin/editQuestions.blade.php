@@ -10,11 +10,13 @@
 @section('question')
 
 <form action="/{{ request()->path() }}" method="POST" enctype="multipart/form-data">
+<!-- action="/upload" -->
     <ul class="choices">
-        @foreach($big_item->questions as $item)
+        @foreach($big_item->questions as $question_item)
         <li>
-            <img src="{{$item->image}}" alt=""> 
+            <img src="{{$question_item->image}}" alt=""> 
         </li>
+        <input type="file" name="image[{{ $question_item->id }}]">
         @endforeach
     </ul>
     @csrf
