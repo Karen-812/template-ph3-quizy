@@ -56,9 +56,19 @@ class AdminController extends Controller
     {
         foreach ($request->questions as $id => $question){
             $big_item = BigQuestion::with('questions')->where('id', '=', $id );
-            $big_item->fill(['image' => $question['image']])->save();
         }
-        // dd($request->title);
-        return redirect('/kuizy/admin/editQuestion/?id={{$request->id}}');       
+    }
+    public function updateEachQuiz(Request $request)
+    {
+        foreach ((array)$request->files as $id => $image){
+            dd($image);
+            $dir = 'public';
+            $file_name = $image[0]['originalName'];
+            $image->storeAs($dir, $file_name, ['disk' => 'local']);
+            $big_item = BigQuestion::with('questions')->where('id', '=', $id );
+            $big_item->fill(['image' => $image['image']])->save();
+        }
+        $bq_id = $request->id;
+        return redirect("/kuizy/admin/editEachQuestion/?id={{$bq_id}}");       
     }
 }
