@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BigQuestion;
+use App\Models\Question;
 // use App\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -47,17 +48,25 @@ class AdminController extends Controller
         $big_item->delete();
         return redirect('/kuizy/admin/edit');
     }
+    // -----大問の編集-----
     public function editQuiz(Request $request)
     {
         $big_items = BigQuestion::with('questions')->where('id', '=', $request->id )->get();
-        return view('admin.editQuestions', compact('big_items'));
+        $bq_id = $request->id;
+        return view('admin.editQuestions', compact('big_items','bq_id'));
     }
-    public function updateQuiz(Request $request)
+    public function deleteQuiz(Request $request)
     {
-        foreach ($request->questions as $id => $question){
-            $big_item = BigQuestion::with('questions')->where('id', '=', $id );
-        }
+        // $item = BigQuestion::with('questions')->find($request->id);
+        $bq_id = $request->id;
+        $item = Question::find($request->q_id);
+        // idがbq_id、q_idが
+        $item->delete();
+        return redirect("/kuizy/admin/editQuestion/?id={$bq_id}");
     }
+
+
+    // -----小問の編集-----
     public function updateEachQuiz(Request $request)
     {
         foreach ((array)$request->files as $id => $image){
@@ -69,6 +78,6 @@ class AdminController extends Controller
             $big_item->fill(['image' => $image['image']])->save();
         }
         $bq_id = $request->id;
-        return redirect("/kuizy/admin/editEachQuestion/?id={{$bq_id}}");       
+        return redirect("/kuizy/admin/editEachQuestion/?id={$bq_id}");       
     }
 }
