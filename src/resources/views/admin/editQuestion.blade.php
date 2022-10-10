@@ -16,8 +16,8 @@
         <li>
             <img src="{{$question_item->image}}" alt=""> 
         </li>
+        <a href="/kuizy/admin/editEachQuestion/?id={{$bq_id}}&q_id={{ $question_item->id }}">編集|</a>
         <a href="/kuizy/admin/editQuestion/delete/?id={{$bq_id}}&q_id={{ $question_item->id }}">削除</a>
-        <input type="file" name="image[{{ $question_item->id }}]">
         @endforeach
     </ul>
     @csrf
