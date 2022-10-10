@@ -53,7 +53,7 @@ class AdminController extends Controller
     {
         $big_items = BigQuestion::with('questions')->where('id', '=', $request->id )->get();
         $bq_id = $request->id;
-        return view('admin.editQuestions', compact('big_items','bq_id'));
+        return view('admin.editQuestion', compact('big_items','bq_id'));
     }
     public function deleteQuiz(Request $request)
     {
@@ -67,6 +67,14 @@ class AdminController extends Controller
 
 
     // -----小問の編集-----
+    public function editEachQuiz(Request $request)
+    {
+        $bq_id = $request->id;
+        $q_id = $request->q_id;
+        // $items = Question::with('choices')->where('id', '=', $q_id )->get(); またこのミスやっちゃった〜記録
+        $items = Question::with('choices')->find($q_id );
+        return view('admin.editEachQuestion', compact('bq_id', 'q_id', 'items'));       
+    }
     public function updateEachQuiz(Request $request)
     {
         foreach ((array)$request->files as $id => $image){
