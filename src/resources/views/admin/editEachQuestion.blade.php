@@ -9,15 +9,14 @@
 
 <form action="/{{ request()->path() }}" method="POST" enctype="multipart/form-data">
 <!-- action="/upload" -->
-    <ul class="choices">
-        @foreach($items->choices as $choice_item)
+<ul class="choices">
+    <input type="file" name="image{{$bq_id}}_{{$q_id}}">
+    @foreach($items->choices as $choice_item)
         <li>
-            {{$choice_item->choices}}
+            <input size="30" type="text" name="choices[{{ $choice_item->id }}][title]" value="{{$choice_item->choices}}"></input>
+            <!-- 正解か不正解か管理するボタン追加 -->
+            <a href="/kuizy/admin/editQuestion/delete/?id={{$bq_id}}&q_id={{ $choice_item->id }}">削除</a>
         </li>
-        <a href="/kuizy/admin/editQuestion/delete/?id={{$bq_id}}&q_id={{ $choice_item->id }}">削除</a>
-        <input type="file" name="image[{{ $choice_item->id }}]">
-                <input type="file" name="image[{{ $choice_item->id }}]">
-
         @endforeach
     </ul>
     @csrf
