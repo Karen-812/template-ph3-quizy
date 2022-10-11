@@ -1,8 +1,9 @@
 @extends('layouts.kuizy')
 
-@section('title', '亀戸')
+@section('title', "{$q_id}問目")
+<!-- order番目にしなきゃかも -->
 @section('menubar')
-<a href="/kuizy/admin/add">タイトル一覧へ戻る</a>
+<a href="/kuizy/admin/editQuestion/?id={{ $bq_id }}">戻る</a>
 @endsection
 
 @section('question')
@@ -10,6 +11,7 @@
 <form action="/{{ request()->path() }}" method="POST" enctype="multipart/form-data">
 <!-- action="/upload" -->
 <ul class="choices">
+    <img src="{{$items->image}}" alt="">
     <input type="file" name="image{{$bq_id}}_{{$q_id}}">
     @foreach($items->choices as $choice_item)
         <li>
