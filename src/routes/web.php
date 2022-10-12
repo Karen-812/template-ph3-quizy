@@ -38,6 +38,11 @@ Route::get('kuizy/admin/editQuestion/delete','AdminController@deleteQuiz');
 Route::get('kuizy/admin/editEachQuestion','AdminController@editEachQuiz');
 Route::post('kuizy/admin/editEachQuestion','AdminController@updateEachQuiz');
 
+// 小問追加
+Route::get('kuizy/admin/addNewQuestion','AdminController@createQuiz');
+Route::post('kuizy/admin/addNewQuestion','AdminController@createNewQuiz');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -65,7 +65,6 @@ class AdminController extends Controller
         return redirect("/kuizy/admin/editQuestion/?id={$bq_id}");
     }
 
-
     // -----小問の編集-----
     public function editEachQuiz(Request $request)
     {
@@ -79,13 +78,36 @@ class AdminController extends Controller
     {
         foreach ((array)$request->files as $id => $image){
             dd($image);
-            $dir = 'public';
-            $file_name = $image[0]['originalName'];
-            $image->storeAs($dir, $file_name, ['disk' => 'local']);
-            $big_item = BigQuestion::with('questions')->where('id', '=', $id );
-            $big_item->fill(['image' => $image['image']])->save();
+            
         }
         $bq_id = $request->id;
         return redirect("/kuizy/admin/editEachQuestion/?id={$bq_id}");       
+    }
+
+    // -----小問の追加-----
+    public function createQuiz(Request $request)
+    {
+        $bq_id = $request->id;
+        return view('admin.createQuestion', compact('bq_id'));       
+    }
+    public function createNewQuiz(Request $request)
+    {
+        $bq_id = $request->id;
+        $items = new Question;
+        $items->big_question_id = $bq_id;
+        // questionsにはimageが必要、choicesにはchoicesとis_correctが必要
+        // nameの付け方わからん
+        $items->choices.choices = $request->choices$bq_id;
+        $items->order = Question::max('order') + 1;
+        $items->save();
+        
+        /* ファイル保存
+        $dir = 'public';
+        $file_name = $image[0]['originalName'];
+        $image->storeAs($dir, $file_name, ['disk' => 'local']);
+        $big_item = BigQuestion::with('questions')->where('id', '=', $id );
+        $big_item->fill(['image' => $image['image']])->save();
+        */    
+        return redirect("/kuizy/admin/editQuestion/?id={$bq_id}");       
     }
 }

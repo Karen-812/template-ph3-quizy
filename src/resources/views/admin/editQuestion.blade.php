@@ -10,7 +10,6 @@
 @section('question')
 
 <form action="/{{ request()->path() }}" method="POST" enctype="multipart/form-data">
-<!-- action="/upload" -->
     <ul class="choices">
         @foreach($big_item->questions as $question_item)
         <li>
@@ -18,11 +17,25 @@
         </li>
         <a href="/kuizy/admin/editEachQuestion/?id={{$bq_id}}&q_id={{ $question_item->id }}">編集|</a>
         <a href="/kuizy/admin/editQuestion/delete/?id={{$bq_id}}&q_id={{ $question_item->id }}">削除</a>
+
+        <p>順番を変更する
+                <select name="questions[{{ $question_item->id }}]" id="">
+                    @foreach(range(1, $count) as $num)
+                    <option value="{{ $num }}" 
+                        @if($num === $item->order)
+                        selected
+                        @endif>
+                        {{$num}} 番目
+                    </option>
+                    @endforeach
+                </select>
+        </p>
         @endforeach
     </ul>
     @csrf
     <!-- @csrf Bladeディレクティブを使用して、非表示のトークン入力フィールドを生成できます。 -->
     <input type="submit" value="更新">
+    <a href="/kuizy/admin/addNewQuestion/?id={{$bq_id}}">新規追加</a>
 </form>
 @endsection
 @endforeach
