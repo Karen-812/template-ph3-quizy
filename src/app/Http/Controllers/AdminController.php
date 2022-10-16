@@ -51,9 +51,12 @@ class AdminController extends Controller
     // -----大問の編集-----
     public function editQuiz(Request $request)
     {
-        $big_items = BigQuestion::with('questions')->where('id', '=', $request->id )->get();
+        $big_items = BigQuestion::with('questions')->where('id', '=', $request->id )->orderBy('order', 'asc')->get();
+        $items = Question::where('big_question_id', '=', $request->id )->orderBy('order', 'asc')->get();
+        // dd($items);
+        $count = $items->count();
         $bq_id = $request->id;
-        return view('admin.editQuestion', compact('big_items','bq_id'));
+        return view('admin.editQuestion', compact('big_items', 'items', 'count','bq_id'));
     }
     public function deleteQuiz(Request $request)
     {
@@ -64,7 +67,17 @@ class AdminController extends Controller
         $item->delete();
         return redirect("/kuizy/admin/editQuestion/?id={$bq_id}");
     }
-
+    public function updateQuiz(Request $request)
+    {
+        foreach ($request->orders as $id => $order){
+            $item = Question::find($id);
+            $item->fill(['order' => intval($order)])->save();
+        }
+        // dd($request->title);
+        $bq_id = $request->id;
+        return redirect("/kuizy/admin/editQuestion/?id={$bq_id}");
+    }
+    
     // -----小問の編集-----
     public function editEachQuiz(Request $request)
     {
@@ -96,8 +109,8 @@ class AdminController extends Controller
         $items = new Question;
         $items->big_question_id = $bq_id;
         // questionsにはimageが必要、choicesにはchoicesとis_correctが必要
-        // nameの付け方わからん
-        $items->choices.choices = $request->choices$bq_id;
+        // 以下整備中・・・
+        // $items->choices.choices = $request->choices[{$bq_id}];
         $items->order = Question::max('order') + 1;
         $items->save();
         

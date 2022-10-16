@@ -3,6 +3,7 @@
 @section('title')
 @foreach($big_items as $big_item)
 <h1> {{ $big_item -> name }}</h1>
+
 @section('menubar')
 <a href="/kuizy/admin/add">タイトル一覧へ戻る</a>
 @endsection
@@ -11,7 +12,7 @@
 
 <form action="/{{ request()->path() }}" method="POST" enctype="multipart/form-data">
     <ul class="choices">
-        @foreach($big_item->questions as $question_item)
+        @foreach($items as $question_item)
         <li>
             <img src="{{$question_item->image}}" alt=""> 
         </li>
@@ -19,10 +20,10 @@
         <a href="/kuizy/admin/editQuestion/delete/?id={{$bq_id}}&q_id={{ $question_item->id }}">削除</a>
 
         <p>順番を変更する
-                <select name="questions[{{ $question_item->id }}]" id="">
+                <select name="orders[{{ $question_item->id }}]" id="">
                     @foreach(range(1, $count) as $num)
                     <option value="{{ $num }}" 
-                        @if($num === $item->order)
+                        @if($num === $question_item->order)
                         selected
                         @endif>
                         {{$num}} 番目
