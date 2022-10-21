@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BigQuestion;
 use App\Models\Question;
+use App\Models\Choice;
 // use App\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -74,7 +75,7 @@ class AdminController extends Controller
             $item->fill(['order' => intval($order)])->save();
         }
         // dd($request->title);
-        $bq_id = $request->id;
+        $bq_id = $request->bq_id;
         return redirect("/kuizy/admin/editQuestion/?id={$bq_id}");
     }
     
@@ -84,17 +85,21 @@ class AdminController extends Controller
         $bq_id = $request->id;
         $q_id = $request->q_id;
         // $items = Question::with('choices')->where('id', '=', $q_id )->get(); またこのミスやっちゃった〜記録
-        $items = Question::with('choices')->find($q_id );
-        return view('admin.editEachQuestion', compact('bq_id', 'q_id', 'items'));       
+        $question = Question::with('choices')->find($q_id);
+        return view('admin.editEachQuestion', compact('bq_id', 'q_id', 'question'));       
     }
     public function updateEachQuiz(Request $request)
     {
-        foreach ((array)$request->files as $id => $image){
-            dd($image);
-            
-        }
         $bq_id = $request->id;
-        return redirect("/kuizy/admin/editEachQuestion/?id={$bq_id}");       
+        $q_id = $request->q_id;
+        foreach ($request->choices as $choice_id => $choice){
+            $item = Choice::find($choice_id);
+            $item->fill(['choices' => $choice])->save();
+        }
+        // foreach ((array)$request->files as $id => $image){
+        //     dd($image); 
+        // }
+        return redirect("/kuizy/admin/editEachQuestion/?id={$bq_id}&q_id={$q_id}");       
     }
 
     // -----小問の追加-----

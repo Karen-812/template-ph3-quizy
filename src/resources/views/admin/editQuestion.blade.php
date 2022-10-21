@@ -36,6 +36,7 @@
     @csrf
     <!-- @csrf Bladeディレクティブを使用して、非表示のトークン入力フィールドを生成できます。 -->
     <input type="submit" value="更新">
+    <input type="hidden" name="bq_id" value="{{$bq_id}}">
     <a href="/kuizy/admin/addNewQuestion/?id={{$bq_id}}">新規追加</a>
 </form>
 @endsection
