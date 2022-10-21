@@ -96,9 +96,15 @@ class AdminController extends Controller
             $item = Choice::find($choice_id);
             $item->fill(['choices' => $choice])->save();
         }
-        // foreach ((array)$request->files as $id => $image){
-        //     dd($image); 
-        // }
+
+        $image = $request->image;
+        $dir = 'public';
+        $file_name = $image->getClientOriginalName();
+        $image->storeAs($dir, $file_name, ['disk' => 'local']);
+        $big_item = Question::find($q_id);
+        $q_img = '../../storage/' . $file_name;
+        $big_item->fill(['image' => $q_img])->save();
+        
         return redirect("/kuizy/admin/editEachQuestion/?id={$bq_id}&q_id={$q_id}");       
     }
 
@@ -117,15 +123,22 @@ class AdminController extends Controller
         // 以下整備中・・・
         // $items->choices.choices = $request->choices[{$bq_id}];
         $items->order = Question::max('order') + 1;
+
+        foreach ($request->choices as $choice_id => $choice){
+            $items = new Choice;
+            $items->big_question_id = $bq_id;
+            $item = Choice::find($choice_id);
+            $item->fill(['choices' => $choice])->save();
+        }
+        
+        $image = $request->image;
+        $dir = 'public';
+        $file_name = $image->getClientOriginalName();
+        $image->storeAs($dir, $file_name, ['disk' => 'local']);
+        $q_img = '../../storage/' . $file_name;
+        $items->image = $q_img;
         $items->save();
         
-        /* ファイル保存
-        $dir = 'public';
-        $file_name = $image[0]['originalName'];
-        $image->storeAs($dir, $file_name, ['disk' => 'local']);
-        $big_item = BigQuestion::with('questions')->where('id', '=', $id );
-        $big_item->fill(['image' => $image['image']])->save();
-        */    
         return redirect("/kuizy/admin/editQuestion/?id={$bq_id}");       
     }
 }

@@ -11,7 +11,7 @@
     <!-- action="/upload" -->
     <ul class="choices">
         <li>イメージを追加する</li>
-        <input type="file" name="newImage">
+        <input type="file" name="image">
         <li>
             <input size="30" type="text" name="choices{{$bq_id}}_0" value=""></input>
             <!-- 正解か不正解か管理するボタン追加 -->
@@ -25,6 +25,7 @@
     </ul>
     @csrf
     <!-- @csrf Bladeディレクティブを使用して、非表示のトークン入力フィールドを生成できます。 -->
+    <input type="hidden" name="id" value="{{$bq_id}}">
     <input type="submit" value="作成">
 </form>
 @endsection

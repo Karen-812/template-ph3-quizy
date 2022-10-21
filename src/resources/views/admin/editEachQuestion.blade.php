@@ -12,7 +12,7 @@
 <!-- action="/upload" -->
 <ul class="choices">
     <img src="{{$question->image}}" alt="">
-    <input type="file" name="image{{$bq_id}}_{{$q_id}}">
+    <input type="file" name="image">
     @foreach($question->choices as $choice_item)
         <li>
             <input size="30" type="text" name="choices[{{ $choice_item->id }}]" value="{{$choice_item->choices}}"></input>
