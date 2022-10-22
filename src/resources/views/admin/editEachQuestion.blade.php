@@ -15,10 +15,12 @@
     <input type="file" name="image">
     @foreach($question->choices as $choice_item)
         <li>
-            <input size="30" type="text" name="choices[{{ $choice_item->id }}]" value="{{$choice_item->choices}}"></input>
+            <input size="30" type="text" name="choices[{{ $choice_item->id }}][name]" value="{{$choice_item->choices}}"></input>
             <!-- 正解か不正解か管理するボタン追加 -->
+            <label><input type="radio" name="choices[{{ $choice_item->id }}][valid]" value="1">正解</label>
+            <label><input type="radio" name="choices[{{ $choice_item->id }}][valid]" value="0">不正解</label>
         </li>
-        @endforeach
+    @endforeach
     </ul>
     @csrf
     <!-- @csrf Bladeディレクティブを使用して、非表示のトークン入力フィールドを生成できます。 -->

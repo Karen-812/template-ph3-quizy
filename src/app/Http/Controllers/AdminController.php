@@ -94,9 +94,10 @@ class AdminController extends Controller
         $q_id = $request->q_id;
         foreach ($request->choices as $choice_id => $choice){
             $item = Choice::find($choice_id);
-            $item->fill(['choices' => $choice])->save();
+            $item->fill(['choices' => $choice['name'], 'is_correct' => $choice['valid']])->save();
         }
 
+        // 絶対ファイル選択しないとエラー出るの直したい
         $image = $request->image;
         $dir = 'public';
         $file_name = $image->getClientOriginalName();
@@ -119,17 +120,8 @@ class AdminController extends Controller
         $bq_id = $request->id;
         $items = new Question;
         $items->big_question_id = $bq_id;
-        // questionsにはimageが必要、choicesにはchoicesとis_correctが必要
-        // 以下整備中・・・
-        // $items->choices.choices = $request->choices[{$bq_id}];
         $items->order = Question::max('order') + 1;
-
-        foreach ($request->choices as $choice_id => $choice){
-            $items = new Choice;
-            $items->big_question_id = $bq_id;
-            $item = Choice::find($choice_id);
-            $item->fill(['choices' => $choice])->save();
-        }
+        $id_count = Question::max('id') + 1;
         
         $image = $request->image;
         $dir = 'public';
@@ -138,6 +130,15 @@ class AdminController extends Controller
         $q_img = '../../storage/' . $file_name;
         $items->image = $q_img;
         $items->save();
+
+        foreach ($request->choices as $choice_id => $choice){
+            $choice_item = new Choice;
+            $choice_item->big_question_id = $bq_id;
+            $choice_item->question_id = $id_count;
+            $choice_item->choices = $choice['name'];
+            $choice_item->is_correct = $choice['valid'];
+            $choice_item->save();
+        }
         
         return redirect("/kuizy/admin/editQuestion/?id={$bq_id}");       
     }
