@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BigQuestion;
+use App\Models\Question;
 // use App\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -47,13 +48,79 @@ class AdminController extends Controller
         $big_item->delete();
         return redirect('/kuizy/admin/edit');
     }
+    // -----大問の編集-----
     public function editQuiz(Request $request)
     {
-        /*
-        こっちだとうまくいかなかったのはなんで？
-        $big_items = BigQuestion::find($request->id)->with('questions')->where('id', '=', $request->id )->get();
-        */
-        $big_items = BigQuestion::with('questions')->where('id', '=', $request->id )->get();
-        return view('admin.editQuestions', compact('big_items'));
+        $big_items = BigQuestion::with('questions')->where('id', '=', $request->id )->orderBy('order', 'asc')->get();
+        $items = Question::where('big_question_id', '=', $request->id )->orderBy('order', 'asc')->get();
+        // dd($items);
+        $count = $items->count();
+        $bq_id = $request->id;
+        return view('admin.editQuestion', compact('big_items', 'items', 'count','bq_id'));
+    }
+    public function deleteQuiz(Request $request)
+    {
+        // $item = BigQuestion::with('questions')->find($request->id);
+        $bq_id = $request->id;
+        $item = Question::find($request->q_id);
+        // idがbq_id、q_idが
+        $item->delete();
+        return redirect("/kuizy/admin/editQuestion/?id={$bq_id}");
+    }
+    public function updateQuiz(Request $request)
+    {
+        foreach ($request->orders as $id => $order){
+            $item = Question::find($id);
+            $item->fill(['order' => intval($order)])->save();
+        }
+        // dd($request->title);
+        $bq_id = $request->id;
+        return redirect("/kuizy/admin/editQuestion/?id={$bq_id}");
+    }
+    
+    // -----小問の編集-----
+    public function editEachQuiz(Request $request)
+    {
+        $bq_id = $request->id;
+        $q_id = $request->q_id;
+        // $items = Question::with('choices')->where('id', '=', $q_id )->get(); またこのミスやっちゃった〜記録
+        $items = Question::with('choices')->find($q_id );
+        return view('admin.editEachQuestion', compact('bq_id', 'q_id', 'items'));       
+    }
+    public function updateEachQuiz(Request $request)
+    {
+        foreach ((array)$request->files as $id => $image){
+            dd($image);
+            
+        }
+        $bq_id = $request->id;
+        return redirect("/kuizy/admin/editEachQuestion/?id={$bq_id}");       
+    }
+
+    // -----小問の追加-----
+    public function createQuiz(Request $request)
+    {
+        $bq_id = $request->id;
+        return view('admin.createQuestion', compact('bq_id'));       
+    }
+    public function createNewQuiz(Request $request)
+    {
+        $bq_id = $request->id;
+        $items = new Question;
+        $items->big_question_id = $bq_id;
+        // questionsにはimageが必要、choicesにはchoicesとis_correctが必要
+        // 以下整備中・・・
+        // $items->choices.choices = $request->choices[{$bq_id}];
+        $items->order = Question::max('order') + 1;
+        $items->save();
+        
+        /* ファイル保存
+        $dir = 'public';
+        $file_name = $image[0]['originalName'];
+        $image->storeAs($dir, $file_name, ['disk' => 'local']);
+        $big_item = BigQuestion::with('questions')->where('id', '=', $id );
+        $big_item->fill(['image' => $image['image']])->save();
+        */    
+        return redirect("/kuizy/admin/editQuestion/?id={$bq_id}");       
     }
 }
