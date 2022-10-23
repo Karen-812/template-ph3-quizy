@@ -11,7 +11,7 @@ class Question extends Model
         return $this->hasMany('App\Models\Choice');
         return $this->belongsTo('App\Models\BigQuestion');
     }
-    protected $fillable = ['order']; 
+    protected $guarded = ['id']; 
     // ↓書いたらエラー直るのですが、これ書いちゃいけなかったような...前も教えて頂いたのに内容忘れましたすみません...
     public $timestamps = false;
 }

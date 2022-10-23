@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BigQuestion;
 use App\Models\Question;
+use App\Models\Choice;
 // use App\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -53,10 +54,9 @@ class AdminController extends Controller
     {
         $big_items = BigQuestion::with('questions')->where('id', '=', $request->id )->orderBy('order', 'asc')->get();
         $items = Question::where('big_question_id', '=', $request->id )->orderBy('order', 'asc')->get();
-        // dd($items);
-        $count = $items->count();
+        $question_count = $items->count();
         $bq_id = $request->id;
-        return view('admin.editQuestion', compact('big_items', 'items', 'count','bq_id'));
+        return view('admin.editQuestion', compact('big_items', 'items', 'question_count','bq_id'));
     }
     public function deleteQuiz(Request $request)
     {
@@ -74,7 +74,7 @@ class AdminController extends Controller
             $item->fill(['order' => intval($order)])->save();
         }
         // dd($request->title);
-        $bq_id = $request->id;
+        $bq_id = $request->bq_id;
         return redirect("/kuizy/admin/editQuestion/?id={$bq_id}");
     }
     
@@ -84,17 +84,28 @@ class AdminController extends Controller
         $bq_id = $request->id;
         $q_id = $request->q_id;
         // $items = Question::with('choices')->where('id', '=', $q_id )->get(); またこのミスやっちゃった〜記録
-        $items = Question::with('choices')->find($q_id );
-        return view('admin.editEachQuestion', compact('bq_id', 'q_id', 'items'));       
+        $question = Question::with('choices')->find($q_id);
+        return view('admin.editEachQuestion', compact('bq_id', 'q_id', 'question'));       
     }
     public function updateEachQuiz(Request $request)
     {
-        foreach ((array)$request->files as $id => $image){
-            dd($image);
-            
-        }
         $bq_id = $request->id;
-        return redirect("/kuizy/admin/editEachQuestion/?id={$bq_id}");       
+        $q_id = $request->q_id;
+        foreach ($request->choices as $choice_id => $choice){
+            $item = Choice::find($choice_id);
+            $item->fill(['choices' => $choice['name'], 'is_correct' => $choice['valid']])->save();
+        }
+
+        // 絶対ファイル選択しないとエラー出るの直したい
+        $image = $request->image;
+        $dir = 'public';
+        $file_name = $image->getClientOriginalName();
+        $image->storeAs($dir, $file_name, ['disk' => 'local']);
+        $big_item = Question::find($q_id);
+        $q_img = '../../storage/' . $file_name;
+        $big_item->fill(['image' => $q_img])->save();
+        
+        return redirect("/kuizy/admin/editEachQuestion/?id={$bq_id}&q_id={$q_id}");       
     }
 
     // -----小問の追加-----
@@ -108,19 +119,26 @@ class AdminController extends Controller
         $bq_id = $request->id;
         $items = new Question;
         $items->big_question_id = $bq_id;
-        // questionsにはimageが必要、choicesにはchoicesとis_correctが必要
-        // 以下整備中・・・
-        // $items->choices.choices = $request->choices[{$bq_id}];
         $items->order = Question::max('order') + 1;
-        $items->save();
+        $id_count = Question::max('id') + 1;
         
-        /* ファイル保存
+        $image = $request->image;
         $dir = 'public';
-        $file_name = $image[0]['originalName'];
+        $file_name = $image->getClientOriginalName();
         $image->storeAs($dir, $file_name, ['disk' => 'local']);
-        $big_item = BigQuestion::with('questions')->where('id', '=', $id );
-        $big_item->fill(['image' => $image['image']])->save();
-        */    
+        $q_img = '../../storage/' . $file_name;
+        $items->image = $q_img;
+        $items->save();
+
+        foreach ($request->choices as $choice_id => $choice){
+            $choice_item = new Choice;
+            $choice_item->big_question_id = $bq_id;
+            $choice_item->question_id = $id_count;
+            $choice_item->choices = $choice['name'];
+            $choice_item->is_correct = $choice['valid'];
+            $choice_item->save();
+        }
+        
         return redirect("/kuizy/admin/editQuestion/?id={$bq_id}");       
     }
 }

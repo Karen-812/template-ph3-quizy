@@ -11,20 +11,26 @@
     <!-- action="/upload" -->
     <ul class="choices">
         <li>イメージを追加する</li>
-        <input type="file" name="newImage">
+        <input type="file" name="image">
         <li>
-            <input size="30" type="text" name="choices{{$bq_id}}_0" value=""></input>
-            <!-- 正解か不正解か管理するボタン追加 -->
+            <input size="30" type="text" name="choices[1][name]" value=""></input>
+            <label><input type="radio" name="choices[1][valid]" value="1">正解</label>
+            <label><input type="radio" name="choices[1][valid]" value="0">不正解</label>
         </li>
         <li>
-            <input size="30" type="text" name="choices{{$bq_id}}_1" value=""></input>
+            <input size="30" type="text" name="choices[2][name]" value=""></input>
+            <label><input type="radio" name="choices[2][valid]" value="1">正解</label>
+            <label><input type="radio" name="choices[2][valid]" value="0">不正解</label>
         </li>
         <li>
-            <input size="30" type="text" name="choices{{$bq_id}}_2" value=""></input>
+            <input size="30" type="text" name="choices[3][name]" value=""></input>
+            <label><input type="radio" name="choices[3][valid]" value="1">正解</label>
+            <label><input type="radio" name="choices[3][valid]" value="0">不正解</label>
         </li>
     </ul>
     @csrf
     <!-- @csrf Bladeディレクティブを使用して、非表示のトークン入力フィールドを生成できます。 -->
+    <input type="hidden" name="id" value="{{$bq_id}}">
     <input type="submit" value="作成">
 </form>
 @endsection
