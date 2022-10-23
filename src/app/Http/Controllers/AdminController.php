@@ -54,10 +54,9 @@ class AdminController extends Controller
     {
         $big_items = BigQuestion::with('questions')->where('id', '=', $request->id )->orderBy('order', 'asc')->get();
         $items = Question::where('big_question_id', '=', $request->id )->orderBy('order', 'asc')->get();
-        // dd($items);
-        $count = $items->count();
+        $question_count = $items->count();
         $bq_id = $request->id;
-        return view('admin.editQuestion', compact('big_items', 'items', 'count','bq_id'));
+        return view('admin.editQuestion', compact('big_items', 'items', 'question_count','bq_id'));
     }
     public function deleteQuiz(Request $request)
     {

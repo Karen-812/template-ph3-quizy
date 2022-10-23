@@ -21,7 +21,7 @@
 
         <p>順番を変更する
                 <select name="orders[{{ $question_item->id }}]" id="">
-                    @foreach(range(1, $count) as $num)
+                    @foreach(range(1, $question_count) as $num)
                     <option value="{{ $num }}" 
                         @if($num === $question_item->order)
                         selected
